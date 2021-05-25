@@ -37,6 +37,12 @@ var letters1 = [
 
 var letters2 = letters1;
 
+function decipher(text) {
+  for(var i = 0; i < text.length; i++) {
+    //TODO: decipher code
+  }
+}
+
 //loop through all words specified in the arguments
 for (var i = 0; i < args.length; i++) {
   //loop through all cipher patterns
@@ -48,9 +54,8 @@ for (var i = 0; i < args.length; i++) {
     letters2.push(start); //put letter at the end
 
     //check word in list of words
-    var isaword = false;
-    for (var k = 0; k < words.length; k++) {
-      break;
+    if(words.includes(decipher(letters1))) {
+      //TODO: log the match
     }
   }
 }
