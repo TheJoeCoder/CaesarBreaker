@@ -1,0 +1,12 @@
+{
+  "name": "caesar-breaker",
+  "version": "1.0.0",
+  "description": "Node.js example server starter project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": []
+}
