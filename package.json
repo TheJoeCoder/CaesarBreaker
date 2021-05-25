@@ -1,7 +1,7 @@
 {
   "name": "caesar-breaker",
   "version": "1.0.0",
-  "description": "Node.js example server starter project",
+  "description": "Simple code to break caesar ciphers",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
