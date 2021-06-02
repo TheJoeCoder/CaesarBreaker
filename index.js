@@ -62,17 +62,16 @@ var letters2 = letters1; //Creates cipher list/letters2 with the contents of let
 function decipher(text = "") {
   var cipheredstring = "";
   for(var i = 0; i < text.length; i++) {
-    var letter = text.charAt(i);
+    var letter = text.charAt(i).toUpperCase();
     /*
       Find ciphered letter from table 2 (rotated) and get letter in same position in 
       table 1 (not rotated), therefore deciphering with the current cipher positions.
       We are also checking if the character provided is not in the table (e.g anything 
       that is not a letter) and we ignore it (don't search for it in the other list) if so.
     */
-    //var cipheredletter = letter.toUpperCase();
-    //var index = letters2.indexOf(letter.toUpperCase());
-    //if(index != -1) cipheredletter = letters1[index];
-    var cipheredletter = letters1[letters2.indexOf(letter.toUpperCase())];
+    var cipheredletter = letter;
+    var index = letters2.indexOf(letter);
+    if(index != -1) cipheredletter = letters1[index];
     
     cipheredstring += cipheredletter;
   }
