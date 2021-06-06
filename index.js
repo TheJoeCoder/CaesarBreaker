@@ -7,16 +7,21 @@
 | |__| (_| \__ \  __/ (_| | |  | |_) | | |  __/ (_| |   <  __/ |
  \____\__,_|___/\___|\__,_|_|  |____/|_|  \___|\__,_|_|\_\___|_|
 
-  Code to break a caesar cipher using a list of words.
+  Code to break a caesar cipher using a list of English words.
   License: GPL3 (basically use it how you like; for more details read the LICENSE file)
 */
 
-const fs = require("fs"); //Load the filesystem library so we can write to files
+const fs = require("fs"); //Load the filesystem library so we can read from and write to files
 
 const list = fs.readFileSync("./words.txt").toString(); //Load the word list
-const words = list.split("\n"); //Split the word list by new lines (\n)
+const words = list.split("\n"); //Split the word list by line breaks (usually \n or \r\n, but in this case \n because file is encoded with LF line endings, not CRLF endings)
 
-const args = process.argv.slice(2); //get command line arguments
+//loop through all words and make them uppercase (but not in the words list file)
+for(var i = 0; i < words.length; i++) {
+  words[i] = words[i].toUpperCase();
+}
+
+const args = process.argv.slice(2); //get command line arguments apart from the first 2 (which are probably `node index.js`)
 
 var letters1 = [
   "A",
@@ -47,8 +52,38 @@ var letters1 = [
   "Z"
 ];
 
-var letters2 = letters1; //Creates cipher list/letters2 with the contents of letters1
+var letters2 = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z"
+];
 
+var wordmatches = {
+
+};
 
 /*
   This function deciphers the input text with the current contents of 
@@ -84,13 +119,23 @@ for (var i = 0; i < args.length; i++) {
   for (var j = 1; j < letters1.length; j++) {
     //cycle cipher
     letters2.push(letters2.shift());
-    //console.log(`Using cipher ${j} (A = ${letters2[0]})`);
-
     //check word in list of words
     var dc = decipher(args[i]);
-    console.log(dc);
-    if(words.includes(dc)) {
-      console.log(`Word match: ${args[i]} -> ${dc} (Cipher ${j})`);
+    if(words.includes(dc.toLowerCase())) {
+      console.log(`Word match: ${args[i].toUpperCase()} -> ${dc} (Cipher ${j})`);
+      wordmatches[j] = wordmatches[j] == null ? 1 : wordmatches[j] + 1; //add 1 ti match count for ciphers
     }
   }
+  //reset cipher after each word
+  letters2 = [
+    "A", "B","C", "D", "E", "F",
+    "G", "H", "I", "J", "K", "L",
+    "M", "N", "O", "P", "Q", "R",
+    "S", "T", "U", "V", "W", "X",
+    "Y", "Z"
+  ];
 }
+
+console.log("FINISHED!");
+console.log(`Results: `);
+console.log(wordmatches);
