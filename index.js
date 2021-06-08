@@ -121,9 +121,9 @@ for (var i = 0; i < args.length; i++) {
     letters2.push(letters2.shift());
     //check word in list of words
     var dc = decipher(args[i]);
-    if(words.includes(dc.toLowerCase())) {
+    if(words.includes(dc.toUpperCase())) {
       console.log(`Word match: ${args[i].toUpperCase()} -> ${dc} (Cipher ${j})`);
-      wordmatches[j] = wordmatches[j] == null ? 1 : wordmatches[j] + 1; //add 1 ti match count for ciphers
+      wordmatches[j] = wordmatches[j] == null ? 1 : wordmatches[j] + 1; //add 1 to match count for ciphers
     }
   }
   //reset cipher after each word
