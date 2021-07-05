@@ -7,22 +7,14 @@
 | |__| (_| \__ \  __/ (_| | |  | |_) | | |  __/ (_| |   <  __/ |
  \____\__,_|___/\___|\__,_|_|  |____/|_|  \___|\__,_|_|\_\___|_|
 
-  Code to break a caesar cipher using a list of English words.
+  Code to break a caesar cipher using a list of words.
   License: GPL3 (basically use it how you like; for more details read the LICENSE file)
 */
 
-const fs = require("fs"); //Load the filesystem library so we can read from and write to files
+const removeDiacritics = require("diacritics").remove; //load the diacritics module to remove the diacritics
+const fs = require("fs"); //Load the filesystem module inbuilt into nodejs so we can read from and write to files
 
-const list = fs.readFileSync("./words.txt").toString(); //Load the word list
-const words = list.split("\n"); //Split the word list by line breaks (usually \n or \r\n, but in this case \n because file is encoded with LF line endings, not CRLF endings)
-
-//loop through all words and make them uppercase (but not in the words list file)
-for(var i = 0; i < words.length; i++) {
-    words[i] = words[i].toUpperCase();
-}
-
-const args = process.argv.slice(2); //get command line arguments apart from the first 2 (which are probably `node index.js`)
-
+//set up ciphers
 var letters1 = [
     "A", "B","C", "D", "E", "F",
     "G", "H", "I", "J", "K", "L",
@@ -49,6 +41,18 @@ function resetCipher() {
     ];
 }
 
+
+const list = fs.readFileSync("./words.txt").toString(); //Load the word list
+const words = list.split("\n"); //Split the word list by line breaks (usually \n or \r\n, but in this case \n because file is encoded with LF line endings, not CRLF endings)
+
+//remove diacritics (è, å, ï, etc) from every word and make them uppercase (but not in the words list file)
+for(var i = 0; i < words.length; i++) {
+    words[i] = removeDiacritics(words[i]).toUpperCase();
+}
+
+const args = process.argv.slice(2); //get command line arguments apart from the first 2 (which are probably `node index.js`)
+
+//initialise variable for storing matches
 var wordmatches = {};
 
 /*
@@ -58,12 +62,12 @@ var wordmatches = {};
   What this code does is look for each letter of the word in letters2 and 
   then look up the letter in the same position, but in letters1 instead.
   This is what I used to cipher the savegames in my Scratch savegame sys-
-  tem (https://scratch.mit.edu/projects/523818864/)
+  tem (https://scratch.mit.edu/projects/523818864/).
 */
 function decipher(text = "") {
     var cipheredstring = "";
     for(var i = 0; i < text.length; i++) {
-        var letter = text.charAt(i).toUpperCase();
+        var letter = removeDiacritics(text.charAt(i)).toUpperCase();
         /*
             Find ciphered letter from table 2 (rotated) and get letter in same position in 
             table 1 (not rotated), therefore deciphering with the current cipher positions.
