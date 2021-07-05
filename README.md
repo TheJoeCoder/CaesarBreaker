@@ -29,6 +29,5 @@ The license is GPL3, which basically means you can do what you want with it, but
 For more details, see the [LICENSE](https://github.com/TheJoeCoder/CaesarBreaker/blob/master/LICENSE) file.
 
 ## Credits
-English words list: https://github.com/dwyl/english-words/
-
-Removing diacritics: https://www.npmjs.com/package/diacritics
+- English words list: https://github.com/dwyl/english-words/
+- Removing diacritics: https://www.npmjs.com/package/diacritics

@@ -83,7 +83,9 @@ function decipher(text = "") {
     return cipheredstring;
 }
 
+
 //loop through all words specified
+console.log("Deciphering...");
 for (var i = 0; i < args.length; i++) {
     //loop through all cipher patterns
     for (var j = 1; j < letters1.length; j++) {

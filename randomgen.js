@@ -94,12 +94,13 @@ for(var i = 0; i < 6; i++) {
     //pick random words
     var randwords = "";
     for(var j = 0; j < length; j++) {
-        randwords += `${words[randInt(0, words.length - 1)]} `;
+        var rand = randInt(0, words.length - 1);
+        randwords += `${words[rand]} `;
     }
     //remove space from end of random list
     randwords = randwords.trim();
     //rotate cipher number of times
-    for(var j = 0; j < ciphert; i++) {
+    for(var j = 0; j < ciphert; j++) {
         letters2.push(letters2.shift());
     }
     //cipher words
