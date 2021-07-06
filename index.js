@@ -102,5 +102,21 @@ for (var i = 0; i < args.length; i++) {
 }
 
 console.log("FINISHED!");
+
 console.log(`Results: `);
-console.log(wordmatches);
+console.log(`Raw output: ${JSON.stringify(wordmatches)}`);
+
+//find highest combinations
+var highestresult = "";
+var highestnumber = 0;
+for (var attributename in wordmatches) {
+    if(wordmatches[attributename] > highestnumber) {
+        highestresult = attributename;
+        highestnumber = wordmatches[attributename];
+    }
+}
+if(JSON.stringify(wordmatches) == "{}") {
+    console.log("No matches found");
+} else {
+    console.log(`Cipher position with highest matches is ${highestresult} (with ${highestnumber} matches).`);
+}
