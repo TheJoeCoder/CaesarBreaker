@@ -44,9 +44,9 @@ function resetCipher() {
 
 
 const list = fs.readFileSync("./words.txt").toString(); //Load the word list
-const words = list.split("\n"); //Split the word list by line breaks (usually \n or \r\n, but in this case \n because file is encoded with LF line endings, not CRLF endings)
+const words = list.split("\n"); //Split the word list by line breaks
 
-//remove diacritics (è, å, ï, etc) from every word and make them uppercase (but not in the words list file)
+//remove diacritics (è, å, ï, etc) from every word and make them uppercase (but not in the words file itself)
 for(var i = 0; i < words.length; i++) {
     words[i] = removeDiacritics(words[i]).toUpperCase();
 }
